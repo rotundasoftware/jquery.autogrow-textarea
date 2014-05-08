@@ -1,7 +1,19 @@
 // Based off https://code.google.com/p/gaequery/source/browse/trunk/src/static/scripts/jquery.autogrow-textarea.js?r=2
 // Modified by David Beck
 
-(function($) {
+( function( factory ) {
+    // UMD wrapper
+    if ( typeof define === 'function' && define.amd ) {
+        // AMD
+        define( [ 'jquery' ], factory );
+    } else if ( typeof exports !== 'undefined' ) {
+        // Node/CommonJS
+        module.exports = factory( require( 'jquery' ) );
+    } else {
+        // Browser globals
+        factory( jQuery );
+    }
+}( function( $ ) {
 
 	var autogrowVerticallyIE8 = function(){
 		return this.each(function(){
@@ -131,6 +143,7 @@
 				.change(update)
 				.keyup(update)
 				.keydown(update)
+				.bind( "update.autogrow", update )
 				.bind( "remove.autogrow", function() {
 					shadow.remove();
 				} );
@@ -142,4 +155,4 @@
         return this;
     };
     
-})(jQuery);
+} ) );
