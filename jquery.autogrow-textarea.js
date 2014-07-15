@@ -15,57 +15,6 @@
     }
 }( function( $ ) {
 
-	var autogrowVerticallyIE8 = function(){
-		return this.each(function(){
-			// Variables
-			var colsDefault = this.cols;
-			var rowsDefault = this.rows;
-
-			//Functions
-			var grow = function() {
-				growByRef(this);
-			};
-
-			var growByRef = function(obj) {
-				var linesCount = 0;
-				var lines = obj.value.split('\n');
-
-				for (var i=lines.length-1; i>=0; --i)
-				{
-					linesCount += Math.floor((lines[i].length / colsDefault / 2) + 1);
-				}
-
-				if (linesCount >= rowsDefault)
-					obj.rows = linesCount + 1;
-				else
-					obj.rows = rowsDefault;
-			};
-
-			var characterWidth = function (obj){
-				var characterWidth = 0;
-				var temp1 = 0;
-				var temp2 = 0;
-				var tempCols = obj.cols;
-
-				obj.cols = 1;
-				temp1 = obj.offsetWidth;
-				obj.cols = 2;
-				temp2 = obj.offsetWidth;
-				characterWidth = temp2 - temp1;
-				obj.cols = tempCols;
-
-				return characterWidth;
-			};
-
-			this.style.height = "auto";
-			this.style.overflow = "hidden";
-			this.onkeyup = grow;
-			this.onfocus = grow;
-			this.onblur = grow;
-			growByRef(this);
-		});
-	};
-	
     /*
      * Auto-growing textareas; technique ripped from Facebook
      */
@@ -75,12 +24,9 @@
 			vertical: true,
 			horizontal: false
 		}, options);
-		
-		if( options.vertical && ! options.horizontal && $.browser.msie && $.browser.version < 9 )
-			return autogrowVerticallyIE8.apply( this, arguments );
-		
-        this.filter('textarea').each(function() {
-            
+
+		this.filter('textarea').each(function() {
+			
             var $this       = $(this),
                 minHeight   = $this.height(),
 				maxHeight	= $this.attr( "maxHeight" ),
