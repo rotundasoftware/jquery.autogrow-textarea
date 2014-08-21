@@ -25,7 +25,7 @@
 			horizontal: false
 		}, options);
 
-		this.filter('textarea').each(function() {
+		this.filter('textarea,input').each(function() {
 			
             var $this       = $(this),
                 minHeight   = $this.height(),
@@ -35,7 +35,7 @@
             
 			if( typeof( maxHeight ) == "undefined" ) maxHeight = 1000000;
 			
-            var shadow = $('<div class="autogrow-shadow"></div>').css({
+            var shadow = $('<div class="autogrow-shadow"></div>').css( {
                 position:   'absolute',
                 top:        -10000,
                 left:       -10000,
@@ -44,7 +44,11 @@
 				fontWeight: $this.css('fontWeight'),
                 lineHeight: $this.css('lineHeight'),
                 resize:     'none'
-            }).appendTo(document.body);
+            } ).appendTo(document.body);
+
+            shadow.html( 'a' );
+            var characterWidth = shadow.width();
+            shadow.html( '' );
             
             var update = function() {
     
@@ -70,9 +74,11 @@
 				
 				if( options.horizontal )
 				{
+					var newWidth = Math.max( shadow.width() + characterWidth * 3, minWidth );
 					var maxWidth = options.maxWidth;
-					if( typeof( maxWidth ) == "undefined" ) maxWidth = $this.parent().width() - 12;
-					$(this).css( "width", Math.min( Math.max( shadow.width() + 9, minWidth ), maxWidth ) );
+					//if( typeof( maxWidth ) === "undefined" ) maxWidth = $this.parent().width() - 12; // not sure why we were doing this but seems like a bad idea. doesn't work with inline-block parents for one thing, since it is the text area that should be "pushing" them to be wider
+					if( maxWidth ) newWidth = Math.min( newWidth, maxWidth );
+					$(this).css( "width", newWidth );
 				}
 								
 				if( options.vertical )
