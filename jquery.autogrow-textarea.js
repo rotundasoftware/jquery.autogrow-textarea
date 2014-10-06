@@ -76,7 +76,7 @@
 				// if( $(this).prop( 'tagName' ).toUpperCase() === 'INPUT' )
 				// 	shadow.text(val).css( "width", "auto" );
 				// else
-				shadow.html(val).css( "width", "auto" );
+				shadow.text(val).css( "width", "auto" );
 				
 				if( options.horizontal )
 				{
