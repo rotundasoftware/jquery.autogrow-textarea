@@ -110,7 +110,7 @@
 					update.call( this, valAfterKeypress );
 					return true;
 				})
-				.bind( "update.autogrow", function(){update();} )
+				.bind( "update.autogrow", function(){ update.apply(this); } )
 				.bind( "remove.autogrow", function() {
 					shadow.remove();
 				} );
