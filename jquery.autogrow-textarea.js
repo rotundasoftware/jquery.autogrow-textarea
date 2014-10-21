@@ -68,7 +68,7 @@
 						.replace(/\n/g, '<br/>')
 						.replace(/ {2,}/g, function(space) { return times('&nbsp;', space.length -1) + ' '; });
 				else
-					val = val.replace(/ /g, '&nbsp;');
+					val = escapeHtml( val );
 
 				//if( options.horizontal )
 				//	val = $.trim( val );
@@ -76,7 +76,7 @@
 				// if( $(this).prop( 'tagName' ).toUpperCase() === 'INPUT' )
 				// 	shadow.text(val).css( "width", "auto" );
 				// else
-				shadow.text(val).css( "width", "auto" );
+				shadow.html( val ).css( "width", "auto" ); // need to use html here otherwise no way to count spaces (with html we can use &nbsp;)
 				
 				if( options.horizontal )
 				{
@@ -168,5 +168,19 @@
         return res;
     };
 
-    
+    var entityMap = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': '&quot;',
+        "'": '&#39;',
+        "/": '&#x2F;',
+        " ": '&nbsp;'
+    };
+
+    function escapeHtml(string) {
+        return String(string).replace(/[&<>"'\/\ ]/g, function (s) {
+            return entityMap[s];
+         } );
+    }
 } ) );
