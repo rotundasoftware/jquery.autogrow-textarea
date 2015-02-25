@@ -23,6 +23,7 @@
 		options = $.extend( {
 			vertical: true,
 			horizontal: false,
+            		fixMinHeight: true,
 			characterSlop: 0
 		}, options);
 
@@ -32,7 +33,7 @@
                 minHeight   = $this.height(),
 				maxHeight	= $this.attr( "maxHeight" ),
 				minWidth	= typeof( $this.attr( "minWidth" ) ) == "undefined" ? 0 : $this.attr( "minWidth" );
-            
+            		if( !options.fixMinHeight ) minHeight = 0;
 			if( typeof( maxHeight ) == "undefined" ) maxHeight = 1000000;
 			
             var shadow = $('<div class="autogrow-shadow"></div>').css( {
