@@ -32,7 +32,7 @@
             var $this       = $(this),
                 minHeight   = $this.height(),
 				maxHeight	= $this.attr( "maxHeight" ),
-				minWidth	= typeof( $this.attr( "minWidth" ) ) == "undefined" ? 0 : $this.attr( "minWidth" );
+				minWidth	= typeof( $this.attr( "minWidth" ) ) == "undefined" ? 0 : parseInt($this.attr( "minWidth" ), 10);
             		if( !options.fixMinHeight ) minHeight = 0;
 			if( typeof( maxHeight ) == "undefined" ) maxHeight = 1000000;
 			
