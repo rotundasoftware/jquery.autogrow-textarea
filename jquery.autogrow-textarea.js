@@ -23,6 +23,7 @@
 		options = $.extend( {
 			vertical: true,
 			horizontal: false,
+            		fixMinHeight: true,
 			characterSlop: 0
 		}, options);
 
@@ -31,8 +32,8 @@
             var $this       = $(this),
                 minHeight   = $this.height(),
 				maxHeight	= $this.attr( "maxHeight" ),
-				minWidth	= typeof( $this.attr( "minWidth" ) ) == "undefined" ? 0 : $this.attr( "minWidth" );
-            
+				minWidth	= typeof( $this.attr( "minWidth" ) ) == "undefined" ? 0 : parseInt($this.attr( "minWidth" ), 10);
+            		if( !options.fixMinHeight ) minHeight = 0;
 			if( typeof( maxHeight ) == "undefined" ) maxHeight = 1000000;
 			
             var shadow = $('<div class="autogrow-shadow"></div>').css( {
@@ -61,9 +62,9 @@
 				if( val === '' && $(this).attr("placeholder") ) val = $(this).attr("placeholder");
 				
 				if( options.vertical )
-					val = val.replace(/</g, '&lt;')
+					val = val.replace(/&/g, '&amp;')
+						.replace(/</g, '&lt;')
 						.replace(/>/g, '&gt;')
-						.replace(/&/g, '&amp;')
 						.replace(/\n$/, '<br/>&nbsp;')
 						.replace(/\n/g, '<br/>')
 						.replace(/ {2,}/g, function(space) { return times('&nbsp;', space.length -1) + ' '; });
