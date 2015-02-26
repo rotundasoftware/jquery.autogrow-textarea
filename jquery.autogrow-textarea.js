@@ -61,9 +61,9 @@
 				if( val === '' && $(this).attr("placeholder") ) val = $(this).attr("placeholder");
 				
 				if( options.vertical )
-					val = val.replace(/</g, '&lt;')
+					val = val.replace(/&/g, '&amp;')
+						.replace(/</g, '&lt;')
 						.replace(/>/g, '&gt;')
-						.replace(/&/g, '&amp;')
 						.replace(/\n$/, '<br/>&nbsp;')
 						.replace(/\n/g, '<br/>')
 						.replace(/ {2,}/g, function(space) { return times('&nbsp;', space.length -1) + ' '; });
