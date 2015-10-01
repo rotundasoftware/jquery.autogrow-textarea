@@ -1,6 +1,6 @@
 {
   "name": "jquery.autogrow-textarea",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "This is a jquery plugin that will auto-grow your text areas vertically (like facebook) or horizontally. It is based off [a code snippet by dhruvbird](https://code.google.com/p/gaequery/source/browse/trunk/src/static/scripts/jquery.autogrow-textarea.js?r=2). The plugin uses a hidden mirror textarea to calculate the idea height (and width) of the target text area. Differences from the original code snippet are:",
   "main": "jquery.autogrow-textarea.js",
   "scripts": {
