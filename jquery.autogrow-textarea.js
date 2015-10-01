@@ -93,7 +93,9 @@
                                 
                 if( options.vertical )
                 {
-                    shadow.css( "width", $(this).width() - parseInt($this.css('paddingLeft'),10) - parseInt($this.css('paddingRight'),10) );
+                    var shadowWidth = $(this).width();
+                    if( ! borderBox ) shadowWidth = shadowWidth - parseInt($this.css('paddingLeft'),10) - parseInt($this.css('paddingRight'),10);
+                    shadow.css( "width", shadowWidth );
                     var shadowHeight = borderBox ? shadow.outerHeight() : shadow.height();
                     var newHeight = Math.min( Math.max( shadowHeight, minHeight ), maxHeight );
                     $(this).css( "height", newHeight );
