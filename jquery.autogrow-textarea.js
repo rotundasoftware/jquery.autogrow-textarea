@@ -30,7 +30,7 @@
             
             var $this       = $(this),
                 borderBox   = $this.css( 'box-sizing' ) === 'border-box',
-                minHeight   = borderBox ? $this.outerHeight() : $this.height(),
+                // minHeight   = borderBox ? $this.outerHeight() : $this.height(),
                 maxHeight   = $this.attr( "maxHeight" ),
                 minWidth    = typeof( $this.attr( "minWidth" ) ) == "undefined" ? 0 : $this.attr( "minWidth" );
             
@@ -44,7 +44,14 @@
                 fontFamily: $this.css('fontFamily'),
                 fontWeight: $this.css('fontWeight'),
                 lineHeight: $this.css('lineHeight'),
-                padding:    $this.css('padding'),
+                paddingLeft:    $this.css('paddingLeft'),
+                paddingRight:    $this.css('paddingRight'),
+                paddingTop:    $this.css('paddingTop'),
+                paddingBottom:    $this.css('paddingBottom'),
+                borderTop:    $this.css('borderTop'),
+                borderBottom:    $this.css('borderBottom'),
+                borderLeft:    $this.css('borderLeft'),
+                borderRight:    $this.css('borderRight'),
                 resize:     'none'
             } ).appendTo(document.body);
 
@@ -97,6 +104,10 @@
                     if( ! borderBox ) shadowWidth = shadowWidth - parseInt($this.css('paddingLeft'),10) - parseInt($this.css('paddingRight'),10);
                     shadow.css( "width", shadowWidth );
                     var shadowHeight = borderBox ? shadow.outerHeight() : shadow.height();
+
+                    $(this).css( "height", "auto" );
+                    minHeight = borderBox ? $this.outerHeight() : $this.height();
+
                     var newHeight = Math.min( Math.max( shadowHeight, minHeight ), maxHeight );
                     $(this).css( "height", newHeight );
                     $(this).css( "overflow", newHeight == maxHeight ? "auto" : "hidden" );
@@ -107,6 +118,8 @@
                 .change(function(){update.call( this );return true;})
                 .keyup(function(){update.call( this );return true;})
                 .keypress(function( event ) {
+                    if( event.ctrlKey || event.metaKey ) return;
+
                     var val = this.value;
                     var caretInfo = _getCaretInfo( this );
 
