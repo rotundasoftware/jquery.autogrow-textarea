@@ -20,6 +20,6 @@
     "url": "https://github.com/rotundasoftware/jquery.autogrow-textarea/issues"
   },
   "peerDependencies": {
-    "jquery": "2.x"
+    "jquery": ">=2"
   }
 }
